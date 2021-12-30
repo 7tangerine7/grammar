@@ -24,4 +24,4 @@ jobs:
           pip install pip install opencv-python
       - name: Test with pytest
         run: |
-            python -m doctest -v grammar/*.py
+            python -m doctest -v grammar-code/*.py

@@ -35,8 +35,6 @@ def q(sample, standard):
     """
     >>> q(np.array([[1, 1], [1, 1]]), np.array([[1, 1], [1, 1]]))
     True
-    >>> q(np.array([[1, 0], [1, 1]]), np.array([[1, 1], [1, 1]]))
-    False
     """
     return np.array_equal(sample, standard)
 

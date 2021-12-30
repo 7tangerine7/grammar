@@ -14,7 +14,8 @@ def f(sample, state, d, row_s, row_e, col_s, col_e):
             for kU in range(state):
                 for kD in range(state):
                     if (kU, kD) in vertical:
-                        h_check = h_check or (d[kU, row_s, iii, col_s, col_e] and d[kD, iii+1, row_e, col_s, col_e] and vertical[(kU, kD)] == state)
+                        h_check = h_check or (d[kU, row_s, iii, col_s, col_e] and d[kD, iii+1, row_e, col_s, col_e]
+                                              and vertical[(kU, kD)] == state)
         w_check = False
         for jjj in range(col_s, col_e):
             for kL in range(12):
@@ -31,6 +32,12 @@ def f(sample, state, d, row_s, row_e, col_s, col_e):
 
 
 def q(sample, standard):
+    """
+    >>> q(np.array([[1, 1], [1, 1]]), np.array([[1, 1], [1, 1]]))
+    True
+    >>> q(np.array([[1, 0], [1, 1]]), np.array([[1, 1], [1, 1]]))
+    False
+    """
     if np.shape(sample) == np.shape(standard):
         if np.array_equal(sample, standard):
             return True

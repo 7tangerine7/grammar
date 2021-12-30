@@ -71,7 +71,8 @@ def CYK(test):
                                     col_s_ = 0
                                 col_e_ = j_end//w - 1
                                 d[k, row_s_, row_e_, col_s_, col_e_] = f(sample_, k, d, row_s_, row_e_, col_s_, col_e_)
-    if np.any(d[:, 0, 2, 0, num_col-1]) == 1:
+    if np.any(d[:, 0, 2, 0, num_col-1] == 1) and not d[6, 0, 2, num_col-1, num_col-1]  \
+            and not d[8, 0, 2, num_col-1, num_col-1]:
         print("Correct!")
         if d[11, 0, 2, 0, 0]:
             print("Без переносу")
@@ -84,7 +85,7 @@ def CYK(test):
 def main():
     v1 = np.concatenate((standard_zero, standard_zero, standard_zero), axis=1)
     v2 = np.concatenate((standard_zero, standard_zero, standard_one), axis=1)
-    v3 = np.concatenate((standard_zero, standard_zero, standard_one), axis=1)
+    v3 = np.concatenate((standard_zero, standard_zero, standard_zero), axis=1)
     test = np.concatenate((v1, v2, v3), axis=0)
     CYK(test)
 

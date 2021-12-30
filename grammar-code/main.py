@@ -8,8 +8,20 @@ def f(sample, state, d, row_s, row_e, col_s, col_e):
     elif state == 1:
         return q(sample, standard_one)
     else:
-        for iii in range(row_s, row_s+1):
-            h =
+        h_check = False
+        for iii in range(row_s+1 , row_e):
+            for kU in range(state+1):
+                for kD in range(state + 1):
+                    if (kU, kD) in vertical:
+                        h_check = h_check or (d[kD, row_s, iii, col_s, col_e] and d[kU, iii+1, row_e, col_s, col_e]
+                                              and vertical[(kU, kD)] == state)
+        w_check = False
+        for jjj in range(col_s+1, col_e):
+            for kL in range(state+1):
+                for kR in range(state+1):
+                    if (kL, kR) in horizontal2:
+                        w_check = w_check or (d[kL, row_s, row_e, col_s, jjj] and d[kR, row_s, row_e, jjj+1, col_e] and
+                                              (or horizontal2[(kL, kR)] == state))
 
 def q(sample, standard):
     if sample == standard:
@@ -36,12 +48,12 @@ def CYK(test):
                             continue
                         else:
                             for k in range(12):
-                                row_s = H//i
-                                row_e = H//i_end
-                                col_s = W//j
-                                col_e = W//j_end
-                                sample = test[i:i_end+1][j:j_end+1]
-                                d[k, row_s, row_e, col_s, col_e] = f(sample, k, d, row_s, row_e, col_s, col_e)
+                                row_s_ = H//i
+                                row_e_ = H//i_end
+                                col_s_ = W//j
+                                col_e_ = W//j_end
+                                sample_ = test[i:i_end+1][j:j_end+1]
+                                d[k, row_s_, row_e_, col_s_, col_e_] = f(sample_, k, d, row_s_, row_e_, col_s_, col_e_)
     if np.any(d[:, 0, 2, 0, num_col-1]) == 1:
         return True
     else:

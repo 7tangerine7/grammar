@@ -38,11 +38,8 @@ def q(sample, standard):
     >>> q(np.array([[1, 0], [1, 1]]), np.array([[1, 1], [1, 1]]))
     False
     """
-    if np.shape(sample) == np.shape(standard):
-        if np.array_equal(sample, standard):
-            return True
-    else:
-        return False
+    return np.array_equal(sample, standard)
+
 
 
 def CYK(test):

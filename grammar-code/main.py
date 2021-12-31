@@ -78,22 +78,25 @@ def CYK(test):
 
 
 def main():
+    """
     v1 = np.concatenate((standard_zero, standard_zero, standard_zero), axis=1)
     v2 = np.concatenate((standard_zero, standard_zero, standard_one), axis=1)
     v3 = np.concatenate((standard_zero, standard_zero, standard_zero), axis=1)
     test = np.concatenate((v1, v2, v3), axis=0)
+    """
     CYK(test)
 
 
 if __name__ == '__main__':
     script_dir_1 = os.path.dirname('1.png')
-    print(script_dir_1)
     script_dir_0 = os.path.dirname('0.png')
+    script_dir_t = os.path.dirname('test.png')
     file_path_1 = os.path.join(script_dir_1, '1.png')
     file_path_0 = os.path.join(script_dir_1, '0.png')
+    file_path_t = os.path.dirname('test.png')
     standard_one = cv.imread(file_path_1, cv.IMREAD_GRAYSCALE)
     standard_zero = cv.imread(file_path_0, cv.IMREAD_GRAYSCALE)
-    print(standard_one)
+    test = cv.imread(file_path_t, cv.IMREAD_GRAYSCALE)
     h, w = np.shape(standard_zero)
     horizontal = {
         (10, 6): 10,

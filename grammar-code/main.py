@@ -47,9 +47,9 @@ def CYK(test):
     for s in range(h*w, H*W+1, h*w):
         for i in range(0, H, h):
             if s > 1419 and i == 2*h: continue
-            for j in range(0, W, w):
+            for j in range(W-w, -w+1, -w):
                 for i_end in range(i+h, H+1, h):
-                    for j_end in range(j+w, W+w, w):
+                    for j_end in range(W, j, -w):
                         if (i_end - i)*(j_end - j) != s:
                             continue
                         else:
@@ -69,9 +69,9 @@ def CYK(test):
     if np.any(d[:, 0, 2, 0, num_col-1] == 1) and not d[6, 0, 2, num_col-1, num_col-1]  \
             and not d[8, 0, 2, num_col-1, num_col-1]:
         print("Correct!")
-        if d[11, 0, 2, 0, 0]:
+        if d[9, 0, 2, 0, 0] or d[8, 0, 2, 0, 0]:
             print("Без переносу")
-        if d[10, 0, 2, 0, 0]:
+        if d[7, 0, 2, 0, 0] or d[6, 0, 2, 0, 0]:
             print("З переносом")
     else:
         print("Incorrect")
@@ -79,9 +79,9 @@ def CYK(test):
 
 def main():
     """
-    v1 = np.concatenate((standard_zero, standard_zero, standard_zero), axis=1)
+    v1 = np.concatenate((standard_one, standard_zero, standard_zero), axis=1)
     v2 = np.concatenate((standard_zero, standard_zero, standard_one), axis=1)
-    v3 = np.concatenate((standard_zero, standard_zero, standard_zero), axis=1)
+    v3 = np.concatenate((standard_one, standard_zero, standard_one), axis=1)
     test = np.concatenate((v1, v2, v3), axis=0)
     """
     CYK(test)
@@ -89,31 +89,25 @@ def main():
 
 if __name__ == '__main__':
 
-    script_dir_1 = os.path.dirname('1.png')
-    script_dir_0 = os.path.dirname('0.png')
-    script_dir_t = os.path.dirname('test.png')
-    file_path_1 = os.path.join(script_dir_1, '1.png')
-    file_path_0 = os.path.join(script_dir_1, '0.png')
-    file_path_t = os.path.join(script_dir_t, 'test.png')
+    script_dir_1 = os.path.dirname('one.png')
+    script_dir_0 = os.path.dirname('zero.png')
+    script_dir_t = os.path.dirname('bad-example.png')
+    file_path_1 = os.path.join(script_dir_1, 'one.png')
+    file_path_0 = os.path.join(script_dir_1, 'zero.png')
+    file_path_t = os.path.join(script_dir_t, 'bad-example.png')
     standard_one = cv.imread(file_path_1, cv.IMREAD_GRAYSCALE)
     standard_zero = cv.imread(file_path_0, cv.IMREAD_GRAYSCALE)
     test = cv.imread(file_path_t, cv.IMREAD_GRAYSCALE)
     h, w = np.shape(standard_zero)
     horizontal = {
-        (10, 6): 10,
-        (10, 7): 11,
-        (11, 7): 10,
-        (11, 6): 10,
-        (10, 8): 10,
-        (11, 7): 11,
-        (11, 9): 11,
-        (10, 9): 11
+        (6, 10): 10,
+        (7, 11): 10,
+        (8, 10): 11,
+        (9, 11): 11
     }
     rename = {
         8: 11,
-        9: 11,
-        7: 10,
-        6: 10
+        9: 11
     }
     vertical = {
         (1, 1): 2,

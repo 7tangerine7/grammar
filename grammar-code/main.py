@@ -94,7 +94,7 @@ if __name__ == '__main__':
     script_dir_t = os.path.dirname('test.png')
     file_path_1 = os.path.join(script_dir_1, '1.png')
     file_path_0 = os.path.join(script_dir_1, '0.png')
-    file_path_t = os.path.dirname(script_dir_t, 'test.png')
+    file_path_t = os.path.join(script_dir_t, 'test.png')
     standard_one = cv.imread(file_path_1, cv.IMREAD_GRAYSCALE)
     standard_zero = cv.imread(file_path_0, cv.IMREAD_GRAYSCALE)
     test = cv.imread(file_path_t, cv.IMREAD_GRAYSCALE)

@@ -39,7 +39,6 @@ def q(sample, standard):
     return np.array_equal(sample, standard)
 
 
-
 def CYK(test):
     H, W = np.shape(test)
     num_col = W // w
@@ -79,9 +78,9 @@ def CYK(test):
 
 def main():
     """
-    v1 = np.concatenate((standard_one, standard_zero, standard_zero), axis=1)
-    v2 = np.concatenate((standard_zero, standard_zero, standard_one), axis=1)
-    v3 = np.concatenate((standard_one, standard_zero, standard_one), axis=1)
+    v1 = np.concatenate((standard_one, standard_zero, standard_one), axis=1)
+    v2 = np.concatenate((standard_zero, standard_one, standard_one), axis=1)
+    v3 = np.concatenate((standard_one, standard_zero, standard_zero), axis=1)
     test = np.concatenate((v1, v2, v3), axis=0)
     """
     CYK(test)
@@ -106,7 +105,7 @@ if __name__ == '__main__':
         (9, 11): 11
     }
     rename = {
-        8: 11,
+        7: 10,
         9: 11
     }
     vertical = {
